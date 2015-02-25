@@ -8,7 +8,7 @@ VOLUME      /srv/www
 # Update package repository and install packages
 RUN         LC_ALL=C DEBIAN_FRONTEND=noninteractive apt-get -y update && \
             LC_ALL=C DEBIAN_FRONTEND=noninteractive apt-get -y install nginx php5-fpm php5-sqlite wget unzip && \
-            LC_ALL=C DEBIAN_FRONTEND=apt-get clean && \
+            LC_ALL=C DEBIAN_FRONTEND=noninteractive apt-get clean && \
             rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Configuration file must be set in the image startup command line (-v ..)
