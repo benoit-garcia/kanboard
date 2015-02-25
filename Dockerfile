@@ -22,3 +22,4 @@ ONBUILD RUN  wget http://kanboard.net/kanboard-latest.zip && \
 
 # Last but least, unleach the daemon!
 ENTRYPOINT   ["/usr/sbin/nginx"]
+CMD          ["-g", "daemon off"]
