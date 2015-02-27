@@ -16,10 +16,10 @@ RUN         LC_ALL=C DEBIAN_FRONTEND=noninteractive apt-get -y update && \
 # Get Kanboard from official site
 RUN         mkdir -p /srv/www
 WORKDIR     /srv/www
-RUN         wget http://kanboard.net/kanboard-latest.zip && \
-            unzip kanboard-latest.zip && \
-            chown -R www-data:www-data kanboard/data && \
-            rm kanboard-latest.zip
+ONBUILD RUN /usr/bin/wget http://kanboard.net/kanboard-latest.zip && \
+            /usr/bin/unzip kanboard-latest.zip && \
+            /bin/chown -R www-data:www-data kanboard/data && \
+            /bin/rm kanboard-latest.zip
 
 # Last but least, unleach the daemon!
 ENTRYPOINT   ["/usr/sbin/nginx"]
