@@ -15,7 +15,7 @@ RUN         LC_ALL=C DEBIAN_FRONTEND=noninteractive apt-get -y update && \
 
 # Get Kanboard from official site
 WORKDIR      /srv/www
-ONBUILD RUN  wget http://kanboard.net/kanboard-latest.zip && \
+RUN          wget http://kanboard.net/kanboard-latest.zip && \
              unzip kanboard-latest.zip && \
              chown -R www-data:www-data kanboard/data && \
              rm kanboard-latest.zip
