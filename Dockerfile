@@ -1,9 +1,6 @@
 FROM        nginx:latest
 MAINTAINER  Benoit <benoit@terra-art.net>
 
-# Expose HTTP port
-EXPOSE      80
-
 # Update package repository and install packages
 RUN         LC_ALL=C DEBIAN_FRONTEND=noninteractive apt-get -y update && \
             LC_ALL=C DEBIAN_FRONTEND=noninteractive apt-get -y install supervisor php5-fpm php5-sqlite wget unzip && \
@@ -22,6 +19,8 @@ COPY        supervisord.conf /etc/supervisor/supervisord.conf
 COPY        nginx.conf /etc/nginx/nginx.conf
 COPY        php-fpm.conf /etc/php5/fpm/php-fpm.conf
 
+# Expose HTTP port
+EXPOSE      80
 
 # Last but least, unleach the daemon!
 ENTRYPOINT   ["/usr/bin/supervisord"]
