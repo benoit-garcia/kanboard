@@ -18,7 +18,7 @@ RUN         wget http://kanboard.net/kanboard-latest.zip && \
 
 # Add configuration files. User can provides customs files using -v in the image startup command line.
 ADD         nginx.conf /etc/nginx/nginx.conf
-ADD         php-fpm.conf /etc/php/php-fpm.conf
+ADD         php-fpm.conf /etc/php5/fpm/php-fpm.conf
 
 # Configure and launch the fastcgi PHP-FPM server
 RUN         ln -s /dev/sdterr /var/log/php5-fpm.log && \
