@@ -1,10 +1,13 @@
 FROM        nginx:latest
 MAINTAINER  Benoit <benoit@terra-art.net>
 
+# Set Environement variables
+ENV         LC_ALL=C
+ENV         DEBIAN_FRONTEND=noninteractive
 # Update package repository and install packages
-RUN         LC_ALL=C DEBIAN_FRONTEND=noninteractive apt-get -y update && \
-            LC_ALL=C DEBIAN_FRONTEND=noninteractive apt-get -y install supervisor php5-fpm php5-sqlite wget unzip && \
-            LC_ALL=C DEBIAN_FRONTEND=noninteractive apt-get clean && \
+RUN         apt-get -y update && \
+            apt-get -y install supervisor php5-fpm php5-sqlite wget unzip && \
+            apt-get clean && \
             rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Fetch the latest software version from the official website if needed
