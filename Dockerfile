@@ -16,7 +16,7 @@ RUN         apt-get -y update && \
 # Fetch the latest software version from the official website if needed
 RUN         test ! -d /usr/share/nginx/html/kanboard-${KANBOARD_VERSION} && \
             wget https://github.com/fguillot/kanboard/archive/v${KANBOARD_VERSION}.tar.gz && \
-            tar xvzf v${KANBOARD_VERSION}.tar.gz -C /usr/share/nginx/html &&
+            tar xvzf v${KANBOARD_VERSION}.tar.gz -C /usr/share/nginx/html && \
             mv /usr/share/nginx/html/kanboard-${KANBOARD_VERSION} /usr/share/nginx/html/kanboard && \
             chown -R www-data:www-data /usr/share/nginx/html/kanboard/data && \
             rm v${KANBOARD_VERSION}.tar.gz
