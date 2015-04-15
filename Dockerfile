@@ -10,7 +10,7 @@ ENV         SUPERVISOR_VERSION=3.0a8-1.1+deb7u1
 # Update package repository and install packages
 RUN         apt-get -y update && \
             apt-get -y install \
-            supervisor=${SUPERVISOR_VERSION} \
+             supervisor=${SUPERVISOR_VERSION} \
              php5-fpm=${PHP_VERSION} \
              php5-sqlite=${PHP_VERSION} \
              wget && \
