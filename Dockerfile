@@ -1,4 +1,4 @@
-FROM        nginx:latest
+FROM        nginx:1.7
 MAINTAINER  Benoit <benoit@terra-art.net>
 
 # Set Environement variables
@@ -9,7 +9,11 @@ ENV         PHP_VERSION=5.4.39-0+deb7u2
 ENV         SUPERVISOR_VERSION=3.0a8-1.1+deb7u1
 # Update package repository and install packages
 RUN         apt-get -y update && \
-            apt-get -y install supervisor=${SUPERVISOR_VERSION} php5-fpm=${PHP_VERSION} php5-sqlite=${PHP_VERSION} wget && \
+            apt-get -y install \
+            supervisor=${SUPERVISOR_VERSION} \
+             php5-fpm=${PHP_VERSION} \
+             php5-sqlite=${PHP_VERSION} \
+             wget && \
             apt-get clean && \
             rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
