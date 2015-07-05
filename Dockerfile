@@ -8,18 +8,18 @@ ENV         KANBOARD_VERSION=1.0.16
 # Update package repository and install packages
 RUN         apt-get -y update && \
             apt-get -y install \
-             supervisor \
              php5-fpm \
              php5-sqlite \
+             supervisor \
+             unzip \
              wget
 
 # Fetch the latest software version from the official website if needed
-RUN         test ! -d /usr/share/nginx/html/kanboard-${KANBOARD_VERSION} && \
-            wget https://github.com/fguillot/kanboard/archive/v${KANBOARD_VERSION}.tar.gz && \
-            tar vxzf v${KANBOARD_VERSION}.tar.gz -C /usr/share/nginx/html && \
-            mv /usr/share/nginx/html/kanboard-${KANBOARD_VERSION} /usr/share/nginx/html/kanboard && \
+RUN         test ! -d /usr/share/nginx/html/kanboard && \
+            wget http://kanboard.net/kanboard-${KANBOARD_VERSION}.zip && \
+            unzip kanboard-${KANBOARD_VERSION}.zip -d /usr/share/nginx/html/ && \
             chown -R www-data:www-data /usr/share/nginx/html/kanboard/data && \
-            rm v${KANBOARD_VERSION}.tar.gz
+            rm kanboard-${KANBOARD_VERSION}.zip
 
 # Add configuration files. User can provides customs files using -v in the image startup command line.
 COPY        supervisord.conf /etc/supervisor/supervisord.conf
