@@ -1,26 +1,22 @@
-FROM        nginx:1.7
+FROM        nginx:1.9
 MAINTAINER  Benoit <benoit@terra-art.net>
 
 # Set Environement variables
 ENV         LC_ALL=C
 ENV         DEBIAN_FRONTEND=noninteractive
-ENV         KANBOARD_VERSION=1.0.13
-ENV         PHP_VERSION=5.4.39-0+deb7u2
-ENV         SUPERVISOR_VERSION=3.0a8-1.1+deb7u1
+ENV         KANBOARD_VERSION=1.0.16
 # Update package repository and install packages
 RUN         apt-get -y update && \
             apt-get -y install \
-             supervisor=${SUPERVISOR_VERSION} \
-             php5-fpm=${PHP_VERSION} \
-             php5-sqlite=${PHP_VERSION} \
-             wget && \
-            apt-get clean && \
-            rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+             supervisor \
+             php5-fpm \
+             php5-sqlite \
+             wget
 
 # Fetch the latest software version from the official website if needed
 RUN         test ! -d /usr/share/nginx/html/kanboard-${KANBOARD_VERSION} && \
             wget https://github.com/fguillot/kanboard/archive/v${KANBOARD_VERSION}.tar.gz && \
-            tar xvzf v${KANBOARD_VERSION}.tar.gz -C /usr/share/nginx/html && \
+            tar vxzf v${KANBOARD_VERSION}.tar.gz -C /usr/share/nginx/html && \
             mv /usr/share/nginx/html/kanboard-${KANBOARD_VERSION} /usr/share/nginx/html/kanboard && \
             chown -R www-data:www-data /usr/share/nginx/html/kanboard/data && \
             rm v${KANBOARD_VERSION}.tar.gz
