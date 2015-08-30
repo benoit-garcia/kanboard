@@ -4,7 +4,7 @@ MAINTAINER  Benoit <benoit@terra-art.net>
 # Set Environement variables
 ENV         LC_ALL=C
 ENV         DEBIAN_FRONTEND=noninteractive
-ENV         KANBOARD_VERSION=1.0.16
+ENV         KANBOARD_VERSION=1.0.17
 # Update package repository and install packages
 RUN         apt-get -y update && \
             apt-get -y install \
@@ -15,8 +15,7 @@ RUN         apt-get -y update && \
              wget
 
 # Fetch the latest software version from the official website if needed
-RUN         test ! -d /usr/share/nginx/html/kanboard && \
-            wget http://kanboard.net/kanboard-${KANBOARD_VERSION}.zip && \
+RUN         wget http://kanboard.net/kanboard-${KANBOARD_VERSION}.zip && \
             unzip kanboard-${KANBOARD_VERSION}.zip -d /usr/share/nginx/html/ && \
             chown -R www-data:www-data /usr/share/nginx/html/kanboard/data && \
             rm kanboard-${KANBOARD_VERSION}.zip
